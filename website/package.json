@@ -1,0 +1,35 @@
+{
+  "name": "personal-website-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cost-efficient personal website platform on AWS",
+  "workspaces": [
+    "infra",
+    "apps/*",
+    "apps/photo-sharing/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "install:all": "npm install",
+    "build:shared": "npm run build -w packages/shared-types",
+    "build:backend": "npm run build:shared && npm run build -w apps/photo-sharing/backend",
+    "build:landing": "npm run build -w apps/landing",
+    "build:photo-frontend": "npm run build -w apps/photo-sharing/frontend",
+    "build:all": "npm run build:shared && npm run build:backend && npm run build:landing && npm run build:photo-frontend",
+    "dev:landing": "./scripts/local-dev.sh landing",
+    "dev:photo": "./scripts/local-dev.sh photo",
+    "setup": "./scripts/setup-pulumi.sh",
+    "deploy": "./scripts/deploy.sh",
+    "deploy:dev": "./scripts/deploy.sh dev",
+    "deploy:prod": "./scripts/deploy.sh prod",
+    "preview": "cd infra && pulumi preview",
+    "outputs": "cd infra && pulumi stack output",
+    "clean": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && find . -name 'dist' -type d -prune -exec rm -rf '{}' +"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

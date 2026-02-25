@@ -1,0 +1,3 @@
+name: personal-website
+runtime: nodejs
+description: Personal website platform infrastructure on AWS

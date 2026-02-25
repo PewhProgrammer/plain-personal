@@ -1,0 +1,21 @@
+{
+  "name": "infra",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc",
+    "deploy": "pulumi up",
+    "preview": "pulumi preview",
+    "destroy": "pulumi destroy"
+  },
+  "dependencies": {
+    "@pulumi/pulumi": "^3.100.0",
+    "@pulumi/aws": "^6.15.0",
+    "@pulumi/awsx": "^2.5.0",
+    "mime-types": "^2.1.35"
+  },
+  "devDependencies": {
+    "@types/mime-types": "^2.1.4",
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.3"
+  }
+}
