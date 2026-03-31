@@ -48,19 +48,31 @@ function isInsideCollider(x, y) {
   return false;
 }
 
+function _collidesAnyExcl(cx, cy, r, exclSet) {
+  for (let i = 0; i < COLLIDERS.length; i++) {
+    if (exclSet.has(i)) continue;
+    if (_circleHitsBox(cx, cy, r, COLLIDERS[i])) return true;
+  }
+  return false;
+}
+
 function resolveMovement(oldX, oldY, newX, newY, radius, targetX, targetY) {
   newX = Math.max(radius, Math.min(ROOM_W - radius, newX));
   newY = Math.max(radius, Math.min(ROOM_D - radius, newY));
 
-  const excl = _findColliderNear(targetX, targetY, radius);
+  const excl = new Set();
+  const targetIdx = _findColliderNear(targetX, targetY, radius);
+  if (targetIdx >= 0) excl.add(targetIdx);
+  const originIdx = _findColliderNear(oldX, oldY, radius);
+  if (originIdx >= 0) excl.add(originIdx);
 
-  if (!_collidesAny(newX, newY, radius, excl)) {
+  if (!_collidesAnyExcl(newX, newY, radius, excl)) {
     return {x: newX, y: newY};
   }
-  if (!_collidesAny(newX, oldY, radius, excl)) {
+  if (!_collidesAnyExcl(newX, oldY, radius, excl)) {
     return {x: newX, y: oldY};
   }
-  if (!_collidesAny(oldX, newY, radius, excl)) {
+  if (!_collidesAnyExcl(oldX, newY, radius, excl)) {
     return {x: oldX, y: newY};
   }
   return {x: oldX, y: oldY};
