@@ -61,10 +61,10 @@ function resolveMovement(oldX, oldY, newX, newY, radius, targetX, targetY) {
   newY = Math.max(radius, Math.min(ROOM_D - radius, newY));
 
   const excl = new Set();
-  const targetIdx = _findColliderNear(targetX, targetY, radius);
-  if (targetIdx >= 0) excl.add(targetIdx);
-  const originIdx = _findColliderNear(oldX, oldY, radius);
-  if (originIdx >= 0) excl.add(originIdx);
+  for (let i = 0; i < COLLIDERS.length; i++) {
+    if (_circleHitsBox(targetX, targetY, radius, COLLIDERS[i])) excl.add(i);
+    if (_circleHitsBox(oldX, oldY, radius, COLLIDERS[i])) excl.add(i);
+  }
 
   if (!_collidesAnyExcl(newX, newY, radius, excl)) {
     return {x: newX, y: newY};
