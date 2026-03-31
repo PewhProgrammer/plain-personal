@@ -183,6 +183,8 @@ function updateHumans() {
   // Check for cuddle trigger (from button press, synced via WebSocket)
   if (cuddleTriggered) {
     cuddleTriggered = false;
+    workoutStarted = false;
+    workoutStopped = false;
     for (const [name, h] of Object.entries(humans)) {
       h.speechText = '';
       h.speechAlpha = 0;
