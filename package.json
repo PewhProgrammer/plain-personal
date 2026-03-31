@@ -1,0 +1,12 @@
+{
+  "name": "thinh-apps",
+  "version": "1.0.0",
+  "description": "Landing page and collection of small web apps",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

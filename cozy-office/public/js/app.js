@@ -2,9 +2,8 @@
 
 // ── Resize handler ───────────────────────────────────────────────
 function resize() {
-  const wrap = document.getElementById('canvas-wrap');
-  canvas.width = wrap.clientWidth;
-  canvas.height = wrap.clientHeight;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
   if (canvas.width < 600) {
     renderScale = Math.min(canvas.width / 720, 0.75);
     camX = canvas.width / 2 - 28 * renderScale;
